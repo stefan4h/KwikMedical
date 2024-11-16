@@ -1,0 +1,67 @@
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #333;
+}
+
+.loading {
+  text-align: center;
+  color: #007bff;
+  font-size: 18px;
+}
+
+.error {
+  text-align: center;
+  color: #ff4d4d;
+  font-size: 18px;
+}
+
+.emergency-list {
+  list-style: none;
+  padding: 0;
+}
+
+.emergency-item {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f7f9fc;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.emergency-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.emergency-item h3 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  color: #0056b3;
+}
+
+.emergency-item p {
+  margin: 5px 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: #ccc;
+  margin: 15px 0;
+}

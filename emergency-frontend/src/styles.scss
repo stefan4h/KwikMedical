@@ -1,0 +1,120 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.form-container {
+  max-width: 1200px; /* Increased width for better readability */
+  width: 90%; /* Make it responsive to smaller screens */
+  padding: 30px; /* Added padding for spacious feel */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+  margin: 20px;
+  display: block;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap; /* Allow fields to wrap in columns */
+  gap: 20px; /* Added consistent spacing */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 calc(50% - 20px); /* Ensure two fields per row on larger screens */
+  min-width: 300px; /* Ensure fields don't get too narrow */
+}
+
+label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+input,
+textarea,
+select {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #007bff;
+  background-color: #fff;
+  outline: none;
+}
+
+textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+button {
+  flex: 1 1 100%; /* Make the button span the full width of the form */
+  padding: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: #d9534f;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+select {
+  appearance: none;
+  background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23999" d="M2 0L0 2h4zM2 5L0 3h4z"/></svg>') no-repeat right 10px center;
+  background-size: 10px 10px;
+}
+
+select:focus {
+  background-image: none;
+}
+
+.form-container::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}

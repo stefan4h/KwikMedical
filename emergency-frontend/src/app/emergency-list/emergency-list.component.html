@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Emergency List</h1>
+  <div *ngIf="loading" class="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <ul *ngIf="!loading && !error" class="emergency-list">
+    <li *ngFor="let emergency of emergencies" class="emergency-item">
+      <h3>{{ emergency.type }} Emergency</h3>
+      <p><strong>Region:</strong> {{ emergency.region }}</p>
+      <hr>
+      <p><strong>Caller Name:</strong> {{ emergency.caller_name }}</p>
+      <p><strong>Caller Phone:</strong> {{ emergency.caller_phone }}</p>
+      <p><strong>Patient Name:</strong> {{ emergency.patient_name }}</p>
+      <p><strong>Patient ID:</strong> {{ emergency.patient_id }}</p>
+      <p><strong>NHS Registration Number:</strong> {{ emergency.nhs_registration_number }}</p>
+      <p><strong>Location:</strong> {{ emergency.location }}</p>
+      <p><strong>Description:</strong> {{ emergency.description }}</p>
+    </li>
+  </ul>
+</div>

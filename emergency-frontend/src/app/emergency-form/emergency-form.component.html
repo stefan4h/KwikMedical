@@ -1,0 +1,63 @@
+<div class="form-container">
+  <h2>Create New Emergency</h2>
+
+  <form [formGroup]="emergencyForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="caller_name">Caller Name</label>
+      <input id="caller_name" type="text" formControlName="caller_name" />
+      <div class="error" *ngIf="emergencyForm.get('caller_name')?.invalid && !emergencyForm.get('caller_name')?.untouched">
+        Caller name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="caller_phone">Caller Phone</label>
+      <input id="caller_phone" type="text" formControlName="caller_phone" />
+    </div>
+
+    <div class="form-group">
+      <label for="nhs_registration_number">NHS Registration Number</label>
+      <input id="nhs_registration_number" type="text" formControlName="nhs_registration_number" />
+      <div class="error" *ngIf="emergencyForm.get('nhs_registration_number')?.invalid && !emergencyForm.get('nhs_registration_number')?.untouched">
+        NHS registration number is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input id="location" type="text" formControlName="location" />
+      <div class="error" *ngIf="emergencyForm.get('location')?.invalid && !emergencyForm.get('location')?.untouched">
+        Location is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="region">Region</label>
+      <select id="region" formControlName="region">
+        <option value="" disabled selected>Select Region</option>
+        <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
+      </select>
+      <div class="error" *ngIf="emergencyForm.get('region')?.invalid && !emergencyForm.get('region')?.untouched">
+        Region is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="type">Type</label>
+      <select id="type" formControlName="type">
+        <option value="" disabled selected>Select Emergency Type</option>
+        <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+      </select>
+      <div class="error" *ngIf="emergencyForm.get('type')?.invalid && !emergencyForm.get('type')?.untouched">
+        Type is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+
+    <button type="submit" [disabled]="emergencyForm.invalid">Create Emergency</button>
+  </form>
+</div>
