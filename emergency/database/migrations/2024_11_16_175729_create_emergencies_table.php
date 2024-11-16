@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('patient_id')->nullable(); // Associated patient
             $table->string('nhs_registration_number');
             $table->string('location'); // Location of the emergency
+            $table->string('region'); // Region of the emergency
             $table->text('description')->nullable(); // Details about the emergency
             $table->timestamps();
         });

@@ -18,6 +18,7 @@ class Emergency extends Model
         'patient_id',
         'nhs_registration_number',
         'location',
+        'region',
         'description',
     ];
 }
