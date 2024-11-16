@@ -29,6 +29,7 @@ class EmergencyController extends Controller
             'nhs_registration_number' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'region' => 'required|string',
+            'type' => 'required|string',
             'description' => 'nullable|string',
         ]);
 
@@ -50,6 +51,7 @@ class EmergencyController extends Controller
             'nhs_registration_number' => $request->nhs_registration_number,
             'location' => $request->location,
             'region' => $request->region,
+            'type' => $request->type,
             'description' => $request->description,
         ]);
 

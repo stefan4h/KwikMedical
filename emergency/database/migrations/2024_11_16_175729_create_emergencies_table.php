@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('nhs_registration_number');
             $table->string('location'); // Location of the emergency
             $table->string('region'); // Region of the emergency
+            $table->string('type'); // type of the emergency
             $table->text('description')->nullable(); // Details about the emergency
             $table->timestamps();
         });
