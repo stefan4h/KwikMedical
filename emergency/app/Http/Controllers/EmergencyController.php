@@ -16,6 +16,13 @@ class EmergencyController extends Controller
     protected $patientServiceUrl = 'http://127.0.0.1:8000/';
 
     /**
+     * The base URL for the external dispatch service.
+     *
+     * @var string
+     */
+    protected $disptachServiceUrl = 'http://127.0.0.1:8002/';
+
+    /**
      * Create a new emergency.
      *
      * @param  Request  $request
@@ -54,6 +61,15 @@ class EmergencyController extends Controller
             'type' => $request->type,
             'description' => $request->description,
         ]);
+
+        $dispatchResponse = Http::post("{$this->disptachServiceUrl}dispatches", [
+            'patient' => $patient,
+            'emergency' => $emergency->toArray(),
+        ]);
+
+        if ($dispatchResponse->failed()) {
+            return response()->json(['message' => 'Failed to notify the dispatch service'], 500);
+        }
 
         return response()->json($emergency, 201);
     }
