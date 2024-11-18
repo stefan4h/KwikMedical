@@ -1,0 +1,23 @@
+.component-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 16px;
+  background-color: #fff;
+  max-width: 400px;
+  font-family: Arial, sans-serif;
+}
+
+.component-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.component-content {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}

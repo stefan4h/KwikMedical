@@ -1,0 +1,13 @@
+<div style="margin: 20px;">
+  <label for="hospital-select">Select Hospital:</label>
+  <select
+    id="hospital-select"
+    [(ngModel)]="selectedHospitalId"
+    (change)="onSelectHospital()"
+  >
+    <option [value]="null" disabled selected>Select a hospital</option>
+    <option *ngFor="let hospital of hospitals" [value]="hospital.id">
+      {{ hospital.region }} - {{ hospital.specialty }}
+    </option>
+  </select>
+</div>

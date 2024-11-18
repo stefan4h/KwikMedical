@@ -1,0 +1,6 @@
+<div style="text-align: center; margin: 20px;">
+  <h1>Hospital Incident Dashboard</h1>
+</div>
+
+<app-hospital-list (hospitalSelected)="onHospitalSelected($event)"></app-hospital-list>
+<app-incident-list [hospitalId]="selectedHospitalId"></app-incident-list>

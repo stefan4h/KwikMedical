@@ -1,0 +1,57 @@
+.incident-container {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  color: #2c3e50;
+  text-align: center;
+}
+
+.incident-list {
+  list-style: none;
+  padding: 0;
+}
+
+.incident-card {
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin: 15px 0;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.incident-section {
+  margin-bottom: 10px;
+}
+
+h3, h4 {
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 5px 0;
+}
+
+.record-list {
+  list-style: none;
+  padding: 0;
+}
+
+.record-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  margin: 10px 0;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.no-incidents-message {
+  color: #7f8c8d;
+  text-align: center;
+  font-style: italic;
+  margin-top: 20px;
+}

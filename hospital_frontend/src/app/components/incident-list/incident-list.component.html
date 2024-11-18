@@ -1,0 +1,40 @@
+<div *ngIf="incidents.length > 0; else noIncidents" class="incident-container">
+  <h2>Incidents</h2>
+  <ul class="incident-list">
+    <li *ngFor="let incident of incidents" class="incident-card">
+      <div class="incident-section">
+        <h3>Emergency Details</h3>
+        <p><strong>Caller Name:</strong> {{ incident.emergency.caller_name }}</p>
+        <p><strong>Caller Phone:</strong> {{ incident.emergency.caller_phone }}</p>
+        <p><strong>Description:</strong> {{ incident.emergency.description }}</p>
+        <p><strong>Location:</strong> {{ incident.emergency.location }}</p>
+        <p><strong>Type:</strong> {{ incident.emergency.type }}</p>
+        <p><strong>Region:</strong> {{ incident.emergency.region }}</p>
+      </div>
+
+      <div class="incident-section">
+        <h3>Patient Details</h3>
+        <p><strong>Name:</strong> {{ incident.patient.name }}</p>
+        <p><strong>NHS Registration Number:</strong> {{ incident.patient.nhs_registration_number }}</p>
+        <p><strong>Address:</strong> {{ incident.patient.address }}</p>
+        <p><strong>Medical Condition:</strong> {{ incident.patient.medical_condition }}</p>
+      </div>
+
+      <div class="incident-section">
+        <h4>Patient Records</h4>
+        <ul class="record-list">
+          <li *ngFor="let record of incident.patient.records" class="record-card">
+            <p><strong>What:</strong> {{ record.what }}</p>
+            <p><strong>When:</strong> {{ record.when | date: 'short' }}</p>
+            <p><strong>Where:</strong> {{ record.where }}</p>
+            <p><strong>Actions Taken:</strong> {{ record.actions_taken }}</p>
+            <p><strong>Time on Call (minutes):</strong> {{ record.time_on_call }}</p>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>
+<ng-template #noIncidents>
+  <p class="no-incidents-message">No incidents for the selected hospital.</p>
+</ng-template>
