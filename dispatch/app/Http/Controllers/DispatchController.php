@@ -48,6 +48,16 @@ class DispatchController extends Controller
             'hospital_id' => $hospital['id'],
         ]);
 
+        $incidentResponse = Http::post("{$this->hospitalServiceUrl}incidents", [
+            'patient' => $patient,
+            'emergency' => $emergency,
+            'hospital_id' => $hospital['id'],
+        ]);
+
+        if ($incidentResponse->failed()) {
+            return response()->json(['message' => 'Failed to create incident for the hospital'], 500);
+        }
+
         return response()->json($dispatch, 201);
     }
 }
