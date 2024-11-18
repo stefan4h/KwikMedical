@@ -20,4 +20,12 @@ class Patient extends Model
         'address',
         'medical_condition',
     ];
+
+    /**
+     * Get all records for the patient, ordered by newest first.
+     */
+    public function records()
+    {
+        return $this->hasMany(Record::class)->orderBy('created_at', 'desc');
+    }
 }

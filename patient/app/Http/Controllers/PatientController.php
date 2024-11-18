@@ -17,7 +17,7 @@ class PatientController extends Controller
     {
         if ($request->has('nhs')) {
             $nhsNumber = $request->query('nhs');
-            $patient = Patient::where('nhs_registration_number', $nhsNumber)->first();
+            $patient = Patient::with('records')->where('nhs_registration_number', $nhsNumber)->first();
 
             if (!$patient) {
                 return response()->json(['message' => 'Patient not found'], 404);
@@ -27,7 +27,7 @@ class PatientController extends Controller
         }
 
         if ($id !== null) {
-            $patient = Patient::find($id);
+            $patient = Patient::with('records')->find($id);
 
             if (!$patient) {
                 return response()->json(['message' => 'Patient not found'], 404);
