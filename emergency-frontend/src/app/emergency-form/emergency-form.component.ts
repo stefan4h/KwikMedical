@@ -18,8 +18,8 @@ export class EmergencyFormComponent {
   emergencyForm: FormGroup;
 
   // Predefined options for region and type
-  regions = ['North', 'South', 'East', 'West', 'Central'];
-  types = ['Heart Attack', 'Stroke', 'Accident', 'Fire', 'Other'];
+  regions = ['North', 'South', 'East', 'West'];
+  types = ['Heart Attack', 'Stroke', 'Accident', 'Fire', 'Poison'];
 
   constructor(
     private fb: FormBuilder,
