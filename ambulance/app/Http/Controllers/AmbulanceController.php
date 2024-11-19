@@ -73,4 +73,27 @@ class AmbulanceController extends Controller
             'message' => 'All ambulances have been released.',
         ]);
     }
+
+    /**
+     * Get all ambulances for a specific region.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAllAmbulancesForRegion(Request $request)
+    {
+        $request->validate([
+            'region' => 'required|string|in:North,East,West,South',
+        ]);
+
+        $region = $request->query('region');
+
+        $ambulances = Ambulance::where('region', $region)->get();
+
+        if ($ambulances->isEmpty()) {
+            return response()->json(['message' => 'No ambulances found in this region'], 404);
+        }
+
+        return response()->json($ambulances);
+    }
 }
