@@ -9,6 +9,7 @@ class incident extends Model
     protected $fillable = [
         'patient',
         'emergency',
+        'ambulance',
         'hospital_id',
     ];
 
@@ -20,6 +21,7 @@ class incident extends Model
     protected $casts = [
         'patient' => 'array',
         'emergency' => 'array',
+        'ambulance' => 'array',
     ];
 
     /**

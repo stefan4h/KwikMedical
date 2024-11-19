@@ -55,3 +55,14 @@ p {
   font-style: italic;
   margin-top: 20px;
 }
+
+/* Highlighted Text for Assigned Ambulance */
+.highlighted-text {
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #3498db;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 10px;
+}

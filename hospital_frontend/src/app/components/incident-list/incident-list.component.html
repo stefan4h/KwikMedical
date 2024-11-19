@@ -10,6 +10,9 @@
         <p><strong>Location:</strong> {{ incident.emergency.location }}</p>
         <p><strong>Type:</strong> {{ incident.emergency.type }}</p>
         <p><strong>Region:</strong> {{ incident.emergency.region }}</p>
+        <p class="highlighted-text">
+          <strong>Assigned Ambulance:</strong> {{ incident.ambulance.name }}
+        </p>
       </div>
 
       <div class="incident-section">
