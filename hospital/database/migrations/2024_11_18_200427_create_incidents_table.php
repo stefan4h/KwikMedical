@@ -16,6 +16,7 @@ return new class extends Migration
             $table->json('patient');
             $table->json('emergency');
             $table->json('ambulance');
+            $table->boolean('ongoing')->default(false);
             $table->foreignId('hospital_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

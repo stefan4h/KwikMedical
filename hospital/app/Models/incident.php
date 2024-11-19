@@ -10,6 +10,7 @@ class incident extends Model
         'patient',
         'emergency',
         'ambulance',
+        'ongoing',
         'hospital_id',
     ];
 
@@ -22,6 +23,7 @@ class incident extends Model
         'patient' => 'array',
         'emergency' => 'array',
         'ambulance' => 'array',
+        'ongoing' => 'boolean',
     ];
 
     /**

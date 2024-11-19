@@ -49,9 +49,35 @@ class IncidentController extends Controller
             'patient' => $request->input('patient'),
             'emergency' => $request->input('emergency'),
             'ambulance' => $ambulance,
+            'ongoing' => true,
             'hospital_id' => $request->input('hospital_id'),
         ]);
 
         return response()->json($incident, 201);
+    }
+
+    /**
+     * Set an ambulance's on_call status to false.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function setOngoingFalse($id)
+    {
+        $incident = Incident::find($id);
+
+        if (!$incident) {
+            return response()->json(['message' => 'Incident not found'], 404);
+        }
+
+        $incident->update(['ongoing' => false]);
+
+        $ambulanceResponse = Http::post("{$this->ambulanceServiceUrl}ambulances/{$incident->ambulance['id']}/release");
+
+        if ($ambulanceResponse->failed()) {
+            return response()->json(['message' => 'Failed to release ambulance.'], 500);
+        }
+
+        return response()->json($incident);
     }
 }

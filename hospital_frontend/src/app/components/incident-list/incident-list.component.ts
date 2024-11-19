@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {HospitalService} from '../../services/hospital.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { HospitalService } from '../../services/hospital.service';
+import { IncidentService } from '../../services/incident.service';
 
 @Component({
   selector: 'app-incident-list',
@@ -12,8 +13,10 @@ export class IncidentListComponent implements OnInit {
   incidents: any[] = [];
   private lastIncidentCount: number = 0;
 
-  constructor(private hospitalService: HospitalService) {
-  }
+  constructor(
+    private hospitalService: HospitalService,
+    private incidentService: IncidentService
+  ) {}
 
   ngOnInit(): void {
     setInterval(() => {
@@ -31,7 +34,17 @@ export class IncidentListComponent implements OnInit {
           this.lastIncidentCount = selectedHospital.incidents.length;
         }
       });
-
     }, 2000);
+  }
+
+  completeIncident(incidentId: number): void {
+    this.incidentService.completeIncident(incidentId).subscribe({
+      next: () => {
+        this.lastIncidentCount = 0;
+      },
+      error: (err) => {
+        alert(`Failed to complete the incident: ${err.message}`);
+      },
+    });
   }
 }

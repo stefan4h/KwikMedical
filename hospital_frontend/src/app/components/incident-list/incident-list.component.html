@@ -1,7 +1,11 @@
 <div *ngIf="incidents.length > 0; else noIncidents" class="incident-container">
   <h2>Incidents</h2>
   <ul class="incident-list">
-    <li *ngFor="let incident of incidents" class="incident-card">
+    <li
+      *ngFor="let incident of incidents"
+      [ngClass]="{'ongoing-card': incident.ongoing}"
+      class="incident-card"
+    >
       <div class="incident-section">
         <h3>Emergency Details</h3>
         <p><strong>Caller Name:</strong> {{ incident.emergency.caller_name }}</p>
@@ -35,6 +39,14 @@
           </li>
         </ul>
       </div>
+
+      <button
+        class="complete-button"
+        (click)="completeIncident(incident.id)"
+        [disabled]="!incident.ongoing"
+      >
+        Complete Incident
+      </button>
     </li>
   </ul>
 </div>

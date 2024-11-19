@@ -17,4 +17,8 @@ class ambulance extends Model
         'gps_location',
         'on_call',
     ];
+
+    protected $casts = [
+        'on_call' => 'boolean',
+    ];
 }

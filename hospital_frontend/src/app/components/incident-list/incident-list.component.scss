@@ -20,6 +20,12 @@ h2 {
   margin: 15px 0;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.incident-card.ongoing-card {
+  background-color: #ffe6e6;
+  border-color: #ff0000;
 }
 
 .incident-section {
@@ -56,7 +62,6 @@ p {
   margin-top: 20px;
 }
 
-/* Highlighted Text for Assigned Ambulance */
 .highlighted-text {
   font-weight: bold;
   color: #ffffff;
@@ -65,4 +70,25 @@ p {
   border-radius: 4px;
   display: inline-block;
   margin-top: 10px;
+}
+
+.complete-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #2c81ba;
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
 }
