@@ -6,10 +6,10 @@ import { IncidentService, Message } from '../services/incident.service';
 
 @Component({
   selector: 'app-view-incident',
-  templateUrl: './view-message.page.html',
-  styleUrls: ['./view-message.page.scss'],
+  templateUrl: './view-incident-page.component.html',
+  styleUrls: ['./view-incident-page.component.scss'],
 })
-export class ViewMessagePage implements OnInit {
+export class ViewIncidentPage implements OnInit {
   public message!: Message;
   private data = inject(IncidentService);
   private activatedRoute = inject(ActivatedRoute);

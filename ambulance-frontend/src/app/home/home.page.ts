@@ -1,18 +1,20 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { RefresherCustomEvent, ModalController } from '@ionic/angular';
-import { IncidentService, Message } from '../services/incident.service';
+import { IncidentService } from '../services/incident.service';
 import { AmbulanceNamePopupComponent } from '../ambulance-name-popup/ambulance-name-popup.component';
+import { BehaviorSubject, interval, Subscription, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit, OnDestroy {
   private incidentService = inject(IncidentService);
   public ambulanceName: string = 'N11';
   public incidents: any[] = [];
-  private lastIncidentCount: number = 0;
+  private ambulanceNameSubject = new BehaviorSubject<string>(this.ambulanceName);
+  private pollingSubscription: Subscription | null = null;
 
   constructor(private modalController: ModalController) {}
 
@@ -20,14 +22,14 @@ export class HomePage {
     this.startPolling();
   }
 
+  ngOnDestroy(): void {
+    this.stopPolling();
+  }
+
   refresh(ev: any) {
     setTimeout(() => {
       (ev as RefresherCustomEvent).detail.complete();
     }, 3000);
-  }
-
-  getIncidents(): any[] {
-    return this.incidents;
   }
 
   async openPopup() {
@@ -42,29 +44,36 @@ export class HomePage {
 
     if (data !== null) {
       this.ambulanceName = data;
-      this.startPolling();
+      this.ambulanceNameSubject.next(this.ambulanceName); // Trigger incident reload
+      this.restartPolling(); // Restart polling with the updated ambulance name
     }
   }
 
   private startPolling(): void {
-    setInterval(() => {
-      this.incidentService
-        .getIncidentsByAmbulanceName(this.ambulanceName)
-        .subscribe((newIncidents) => {
-          if (newIncidents.length !== this.lastIncidentCount) {
-            const newIncidentIds = newIncidents.map((i) => i.id);
-            const currentIncidentIds = this.incidents.map((i) => i.id);
+    this.pollingSubscription = this.ambulanceNameSubject
+      .pipe(
+        switchMap((ambulanceName) =>
+          interval(1000).pipe(
+            switchMap(() =>
+              this.incidentService.getIncidentsByAmbulanceName(ambulanceName)
+            )
+          )
+        )
+      )
+      .subscribe((newIncidents) => {
+        this.incidents = newIncidents;
+      });
+  }
 
-            const hasNewIncidents = newIncidentIds.some(
-              (id) => !currentIncidentIds.includes(id)
-            );
+  private stopPolling(): void {
+    if (this.pollingSubscription) {
+      this.pollingSubscription.unsubscribe();
+      this.pollingSubscription = null;
+    }
+  }
 
-            if (hasNewIncidents) {
-              this.incidents = newIncidents;
-              this.lastIncidentCount = newIncidents.length;
-            }
-          }
-        });
-    }, 2000);
+  private restartPolling(): void {
+    this.stopPolling();
+    this.startPolling();
   }
 }

@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'incident/:id',
-    loadChildren: () => import('./view-message/view-message.module').then( m => m.ViewMessagePageModule)
+    loadChildren: () => import('./view-incident/view-incident.module').then(m => m.ViewIncidentPageModule)
   },
   {
     path: '',

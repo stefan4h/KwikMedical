@@ -26,13 +26,7 @@ export class IncidentListComponent implements OnInit {
           (hospital) => hospital.id === Number(this.hospitalId)
         );
 
-        if (
-          selectedHospital &&
-          selectedHospital.incidents.length !== this.lastIncidentCount
-        ) {
-          this.incidents = selectedHospital.incidents;
-          this.lastIncidentCount = selectedHospital.incidents.length;
-        }
+        this.incidents = selectedHospital.incidents;
       });
     }, 2000);
   }
