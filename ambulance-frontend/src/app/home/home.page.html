@@ -20,6 +20,9 @@
   </ion-header>
 
   <ion-list>
-    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
+    <app-incident
+      *ngFor="let incident of getIncidents()"
+      [incident]="incident"
+    ></app-incident>
   </ion-list>
 </ion-content>

@@ -27,7 +27,7 @@ class AmbulanceController extends Controller
             ->get();
 
         if ($ambulances->isEmpty()) {
-            return response()->json(['message' => 'No available ambulances in this region'], 404);
+            return response()->json(['incident' => 'No available ambulances in this region'], 404);
         }
 
         // Pick a random ambulance to simulate picking by location
@@ -50,7 +50,7 @@ class AmbulanceController extends Controller
         $ambulance = Ambulance::find($id);
 
         if (!$ambulance) {
-            return response()->json(['message' => 'Ambulance not found'], 404);
+            return response()->json(['incident' => 'Ambulance not found'], 404);
         }
 
         // Set the ambulance to not on call
@@ -70,7 +70,7 @@ class AmbulanceController extends Controller
         Ambulance::where('on_call', true)->update(['on_call' => false]);
 
         return response()->json([
-            'message' => 'All ambulances have been released.',
+            'incident' => 'All ambulances have been released.',
         ]);
     }
 
@@ -91,7 +91,7 @@ class AmbulanceController extends Controller
         $ambulances = Ambulance::where('region', $region)->get();
 
         if ($ambulances->isEmpty()) {
-            return response()->json(['message' => 'No ambulances found in this region'], 404);
+            return response()->json(['incident' => 'No ambulances found in this region'], 404);
         }
 
         return response()->json($ambulances);

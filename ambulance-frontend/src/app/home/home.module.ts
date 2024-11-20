@@ -5,17 +5,18 @@ import { FormsModule } from '@angular/forms';
 
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
-import { MessageComponentModule } from '../message/message.module';
+import { IncidentComponentModule } from '../incident/incident.module';
 import {AmbulanceNamePopupComponent} from "../ambulance-name-popup/ambulance-name-popup.component";
-
+import {provideHttpClient} from "@angular/common/http";
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MessageComponentModule,
-    HomePageRoutingModule,
+    IncidentComponentModule,
+    HomePageRoutingModule
   ],
-  declarations: [HomePage, AmbulanceNamePopupComponent]
+  declarations: [HomePage, AmbulanceNamePopupComponent],
+  providers: [provideHttpClient()]
 })
 export class HomePageModule {}

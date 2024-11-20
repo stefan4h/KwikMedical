@@ -9,10 +9,16 @@ import { AmbulanceNamePopupComponent } from '../ambulance-name-popup/ambulance-n
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  private data = inject(IncidentService);
+  private incidentService = inject(IncidentService);
   public ambulanceName: string = 'N11';
+  public incidents: any[] = [];
+  private lastIncidentCount: number = 0;
 
   constructor(private modalController: ModalController) {}
+
+  ngOnInit(): void {
+    this.startPolling();
+  }
 
   refresh(ev: any) {
     setTimeout(() => {
@@ -20,8 +26,8 @@ export class HomePage {
     }, 3000);
   }
 
-  getMessages(): Message[] {
-    return this.data.getMessages();
+  getIncidents(): any[] {
+    return this.incidents;
   }
 
   async openPopup() {
@@ -35,7 +41,30 @@ export class HomePage {
     const { data } = await modal.onWillDismiss();
 
     if (data !== null) {
-      this.ambulanceName = data; // Update the ambulance name with the new value
+      this.ambulanceName = data;
+      this.startPolling();
     }
+  }
+
+  private startPolling(): void {
+    setInterval(() => {
+      this.incidentService
+        .getIncidentsByAmbulanceName(this.ambulanceName)
+        .subscribe((newIncidents) => {
+          if (newIncidents.length !== this.lastIncidentCount) {
+            const newIncidentIds = newIncidents.map((i) => i.id);
+            const currentIncidentIds = this.incidents.map((i) => i.id);
+
+            const hasNewIncidents = newIncidentIds.some(
+              (id) => !currentIncidentIds.includes(id)
+            );
+
+            if (hasNewIncidents) {
+              this.incidents = newIncidents;
+              this.lastIncidentCount = newIncidents.length;
+            }
+          }
+        });
+    }, 2000);
   }
 }

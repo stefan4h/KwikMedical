@@ -5,7 +5,7 @@ import { IonicModule, Platform } from '@ionic/angular';
 import { IncidentService, Message } from '../services/incident.service';
 
 @Component({
-  selector: 'app-view-message',
+  selector: 'app-view-incident',
   templateUrl: './view-message.page.html',
   styleUrls: ['./view-message.page.scss'],
 })
@@ -19,7 +19,7 @@ export class ViewMessagePage implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.message = this.data.getMessageById(parseInt(id, 10));
+    //this.message = this.data.getMessageById(parseInt(id, 10));
   }
 
   getBackButtonText() {

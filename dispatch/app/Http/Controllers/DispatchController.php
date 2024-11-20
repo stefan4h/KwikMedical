@@ -28,7 +28,7 @@ class DispatchController extends Controller
         $response = Http::get("{$this->hospitalServiceUrl}hospitals");
 
         if ($response->failed()) {
-            return response()->json(['message' => 'Failed to retrieve hospitals'], 500);
+            return response()->json(['incident' => 'Failed to retrieve hospitals'], 500);
         }
 
         $hospitals = $response->json();
@@ -39,7 +39,7 @@ class DispatchController extends Controller
         });
 
         if (!$hospital) {
-            return response()->json(['message' => 'No suitable hospital found'], 404);
+            return response()->json(['incident' => 'No suitable hospital found'], 404);
         }
 
         $dispatch = Dispatch::create([
@@ -55,7 +55,7 @@ class DispatchController extends Controller
         ]);
 
         if ($incidentResponse->failed()) {
-            return response()->json(['message' => 'Failed to create incident for the hospital'], 500);
+            return response()->json(['incident' => 'Failed to create incident for the hospital'], 500);
         }
 
         return response()->json($dispatch, 201);
