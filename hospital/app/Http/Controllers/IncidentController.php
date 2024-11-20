@@ -80,4 +80,25 @@ class IncidentController extends Controller
 
         return response()->json($incident);
     }
+
+    /**
+     * Get incidents for a specific ambulance name, sorted by created_at (desc).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getIncidentsByAmbulance(Request $request)
+    {
+        $request->validate([
+            'ambulance_name' => 'required|string',
+        ]);
+
+        $ambulanceName = $request->query('ambulance_name');
+
+        $incidents = Incident::whereJsonContains('ambulance->name', $ambulanceName)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json($incidents, 200);
+    }
 }
