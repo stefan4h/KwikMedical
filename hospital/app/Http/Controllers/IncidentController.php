@@ -17,6 +17,13 @@ class IncidentController extends Controller
     protected $ambulanceServiceUrl = 'http://127.0.0.1:8004/';
 
     /**
+     * The base URL for the external patient service.
+     *
+     * @var string
+     */
+    protected $patientServiceUrl = 'http://127.0.0.1:8000/';
+
+    /**
      * Store a new incident.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -100,5 +107,43 @@ class IncidentController extends Controller
             ->get();
 
         return response()->json($incidents, 200);
+    }
+
+    public function setIncidentDetails(Request $request, $id)
+    {
+        $request->validate([
+            'what' => 'nullable|string',
+            'when' => 'nullable|string',
+            'where' => 'nullable|string',
+            'actions_taken' => 'nullable|string',
+            'time_on_call' => 'nullable|integer',
+        ]);
+
+        $incident = Incident::find($id);
+
+        if (!$incident) {
+            return response()->json(['message' => 'Incident not found'], 404);
+        }
+
+        $incident->update($request->only([
+            'what',
+            'when',
+            'where',
+            'actions_taken',
+            'time_on_call',
+        ]));
+
+        $recordData = [
+            'patient_id' => (int)$incident->patient['id'],
+            'what' => $request->input('what'),
+            'when' => $request->input('when'),
+            'where' => $request->input('where'),
+            'actions_taken' => $request->input('actions_taken'),
+            'time_on_call' => $request->input('time_on_call'),
+        ];
+
+        Http::post("{$this->patientServiceUrl}records", $recordData);
+
+        return response()->json($incident, 200);
     }
 }

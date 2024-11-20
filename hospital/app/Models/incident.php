@@ -12,6 +12,11 @@ class incident extends Model
         'ambulance',
         'ongoing',
         'hospital_id',
+        'what',
+        'when',
+        'where',
+        'actions_taken',
+        'time_on_call',
     ];
 
     /**

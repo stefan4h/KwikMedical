@@ -6,6 +6,7 @@
 h2 {
   color: #2c3e50;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .incident-list {
@@ -14,22 +15,22 @@ h2 {
 }
 
 .incident-card {
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   margin: 15px 0;
-  padding: 15px;
+  padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .incident-card.ongoing-card {
-  background-color: #ffe6e6;
-  border-color: #ff0000;
+  background-color: #ffefef;
+  border-color: #ff7b7b;
 }
 
 .incident-section {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 h3, h4 {
@@ -41,13 +42,26 @@ p {
   margin: 5px 0;
 }
 
+.highlighted-box {
+  background-color: #f5faff;
+  border: 1px solid #87cefa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.highlighted-box h3 {
+  color: #3498db;
+}
+
 .record-list {
   list-style: none;
   padding: 0;
 }
 
 .record-card {
-  background-color: #ffffff;
+  background-color: #f9f9f9;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   margin: 10px 0;
@@ -55,40 +69,34 @@ p {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+.complete-button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.complete-button:hover {
+  background-color: #2874a6;
+}
+
+.complete-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
 .no-incidents-message {
   color: #7f8c8d;
   text-align: center;
   font-style: italic;
   margin-top: 20px;
-}
-
-.highlighted-text {
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #3498db;
-  padding: 5px 10px;
-  border-radius: 4px;
-  display: inline-block;
-  margin-top: 10px;
-}
-
-.complete-button {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #2c81ba;
-  }
-
-  &:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Record;
 use Illuminate\Http\Request;
 
 class RecordController extends Controller
@@ -17,10 +18,10 @@ class RecordController extends Controller
         $request->validate([
             'patient_id' => 'required|exists:patients,id',
             'what' => 'nullable|string',
-            'when' => 'nullable|date',
+            'when' => 'nullable|string',
             'where' => 'nullable|string',
             'actions_taken' => 'nullable|string',
-            'time_on_call' => 'nullable|string',
+            'time_on_call' => 'nullable|integer',
         ]);
 
         $record = Record::create($request->all());

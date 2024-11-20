@@ -6,33 +6,58 @@
       [ngClass]="{'ongoing-card': incident.ongoing}"
       class="incident-card"
     >
-      <div class="incident-section">
-        <h3>Emergency Details</h3>
-        <p><strong>Caller Name:</strong> {{ incident.emergency.caller_name }}</p>
-        <p><strong>Caller Phone:</strong> {{ incident.emergency.caller_phone }}</p>
-        <p><strong>Description:</strong> {{ incident.emergency.description }}</p>
-        <p><strong>Location:</strong> {{ incident.emergency.location }}</p>
-        <p><strong>Type:</strong> {{ incident.emergency.type }}</p>
-        <p><strong>Region:</strong> {{ incident.emergency.region }}</p>
-        <p class="highlighted-text">
-          <strong>Assigned Ambulance:</strong> {{ incident.ambulance.name }}
-        </p>
+      <div class="incident-details">
+        <!-- Emergency Details Section -->
+        <div class="incident-section">
+          <h3>Emergency Details</h3>
+          <p><strong>Caller Name:</strong> {{ incident.emergency.caller_name }}</p>
+          <p><strong>Caller Phone:</strong> {{ incident.emergency.caller_phone }}</p>
+          <p><strong>Description:</strong> {{ incident.emergency.description }}</p>
+          <p><strong>Location:</strong> {{ incident.emergency.location }}</p>
+          <p><strong>Type:</strong> {{ incident.emergency.type }}</p>
+          <p><strong>Region:</strong> {{ incident.emergency.region }}</p>
+          <p class="highlighted-text">
+            <strong>Assigned Ambulance:</strong> {{ incident.ambulance.name }}
+          </p>
+        </div>
+
+        <!-- Patient Details Section -->
+        <div class="incident-section">
+          <h3>Patient Details</h3>
+          <p><strong>Name:</strong> {{ incident.patient.name }}</p>
+          <p><strong>NHS Registration Number:</strong> {{ incident.patient.nhs_registration_number }}</p>
+          <p><strong>Address:</strong> {{ incident.patient.address }}</p>
+          <p><strong>Medical Condition:</strong> {{ incident.patient.medical_condition }}</p>
+        </div>
+
+        <!-- Highlighted Incident Details Section -->
+        <div
+          *ngIf="
+            incident.what || incident.when || incident.where ||
+            incident.actions_taken || incident.time_on_call
+          "
+          class="highlighted-box"
+        >
+          <h3>Incident Details</h3>
+          <p *ngIf="incident.what"><strong>What:</strong> {{ incident.what }}</p>
+          <p *ngIf="incident.when"><strong>When:</strong> {{ incident.when }}</p>
+          <p *ngIf="incident.where"><strong>Where:</strong> {{ incident.where }}</p>
+          <p *ngIf="incident.actions_taken">
+            <strong>Actions Taken:</strong> {{ incident.actions_taken }}
+          </p>
+          <p *ngIf="incident.time_on_call">
+            <strong>Time on Call (minutes):</strong> {{ incident.time_on_call }}
+          </p>
+        </div>
       </div>
 
+      <!-- Previous Incidents Section -->
       <div class="incident-section">
-        <h3>Patient Details</h3>
-        <p><strong>Name:</strong> {{ incident.patient.name }}</p>
-        <p><strong>NHS Registration Number:</strong> {{ incident.patient.nhs_registration_number }}</p>
-        <p><strong>Address:</strong> {{ incident.patient.address }}</p>
-        <p><strong>Medical Condition:</strong> {{ incident.patient.medical_condition }}</p>
-      </div>
-
-      <div class="incident-section">
-        <h4>Patient Records</h4>
+        <h4>Previous Incidents</h4>
         <ul class="record-list">
           <li *ngFor="let record of incident.patient.records" class="record-card">
             <p><strong>What:</strong> {{ record.what }}</p>
-            <p><strong>When:</strong> {{ record.when | date: 'short' }}</p>
+            <p><strong>When:</strong> {{ record.when }}</p>
             <p><strong>Where:</strong> {{ record.where }}</p>
             <p><strong>Actions Taken:</strong> {{ record.actions_taken }}</p>
             <p><strong>Time on Call (minutes):</strong> {{ record.time_on_call }}</p>
@@ -40,6 +65,7 @@
         </ul>
       </div>
 
+      <!-- Complete Incident Button -->
       <button
         class="complete-button"
         (click)="completeIncident(incident.id)"

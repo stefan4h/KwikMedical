@@ -18,6 +18,11 @@ return new class extends Migration
             $table->json('ambulance');
             $table->boolean('ongoing')->default(false);
             $table->foreignId('hospital_id')->constrained()->cascadeOnDelete();
+            $table->string('what')->nullable();
+            $table->string('when')->nullable();
+            $table->string('where')->nullable();
+            $table->text('actions_taken')->nullable();
+            $table->integer('time_on_call')->nullable();
             $table->timestamps();
         });
     }

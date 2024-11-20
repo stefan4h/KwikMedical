@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('patient_id');
             $table->string('what')->nullable();
-            $table->dateTime('when')->nullable();
+            $table->string('when')->nullable();
             $table->string('where')->nullable();
             $table->text('actions_taken')->nullable();
             $table->integer('time_on_call')->nullable();
