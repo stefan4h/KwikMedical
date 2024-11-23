@@ -1,50 +1,32 @@
-ion-item {
-  --inner-padding-end: 0;
-  --background: transparent;
+.incident-details {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+
+  h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin: 10px 0;
+  }
 }
 
-ion-label {
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
+.incident-update-form {
+  margin: 20px;
 
-ion-item h2 {
-  font-weight: 600;
-  
-  /**
-   * With larger font scales
-   * the date/time should wrap to the next
-   * line. However, there should be
-   * space between the name and the date/time
-   * if they can appear on the same line.
-   */
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+  h3 {
+    color: #34495e;
+    margin-bottom: 20px;
+    text-align: center;
+  }
 
-ion-item .date {
-  align-items: center;
-  display: flex;
-}
+  ion-item {
+    margin-bottom: 15px;
+  }
 
-ion-item ion-icon {
-  font-size: 42px;
-  margin-right: 8px;
-}
-
-ion-item ion-note {
-  font-size: 0.9375rem;
-  margin-right: 12px;
-  font-weight: normal;
-}
-
-h1 {
-  margin: 0;
-  font-weight: bold;
-  font-size: 1.4rem;
-}
-
-p {
-  line-height: 1.4;
+  ion-button {
+    margin-top: 20px;
+  }
 }

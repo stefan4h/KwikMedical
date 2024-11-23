@@ -10,6 +10,23 @@ use Illuminate\Support\Facades\Http;
 class IncidentController extends Controller
 {
     /**
+     * Get a single incident by its ID.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getIncidentById($id)
+    {
+        $incident = Incident::find($id);
+
+        if (!$incident) {
+            return response()->json(['message' => 'Incident not found'], 404);
+        }
+
+        return response()->json($incident, 200);
+    }
+
+    /**
      * The base URL for the external ambulance service.
      *
      * @var string

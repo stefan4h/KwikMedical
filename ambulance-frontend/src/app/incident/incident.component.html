@@ -4,7 +4,7 @@
     <h2>
       {{ incident.patient.name }}
       <span class="date">
-        <ion-note>{{ incident.emergency.created_at | date: 'short' }}</ion-note>
+        <ion-note>{{ incident.emergency.created_at}}</ion-note>
         <ion-icon aria-hidden="true" name="chevron-forward" size="small" *ngIf="isIos()"></ion-icon>
       </span>
     </h2>
