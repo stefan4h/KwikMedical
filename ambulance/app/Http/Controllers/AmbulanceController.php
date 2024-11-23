@@ -96,4 +96,28 @@ class AmbulanceController extends Controller
 
         return response()->json($ambulances);
     }
+
+    /**
+     * Update the GPS location of an ambulance by name.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateGpsLocationByName(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'gps_location' => 'required|string',
+        ]);
+
+        $ambulance = Ambulance::where('name', $request->input('name'))->first();
+
+        if (!$ambulance) {
+            return response()->json(['message' => 'Ambulance not found'], 404);
+        }
+
+        $ambulance->update(['gps_location' => $request->input('gps_location')]);
+
+        return response()->json(['message' => 'GPS location updated', 'ambulance' => $ambulance], 200);
+    }
 }

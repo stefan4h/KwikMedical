@@ -21,4 +21,11 @@ export class IncidentService {
   getIncidentsByAmbulanceName(ambulanceName: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}?ambulance_name=${ambulanceName}`);
   }
+
+  updateAmbulanceGpsLocation(name: string, gpsLocation: string): Observable<any> {
+    return this.http.patch<any>(`http://127.0.0.1:8004/ambulances/update-gps`, {
+      name,
+      gps_location: gpsLocation,
+    });
+  }
 }

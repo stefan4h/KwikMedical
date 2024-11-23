@@ -15,15 +15,19 @@ export class HomePage implements OnInit, OnDestroy {
   public incidents: any[] = [];
   private ambulanceNameSubject = new BehaviorSubject<string>(this.ambulanceName);
   private pollingSubscription: Subscription | null = null;
+  private gpsUpdateSubscription: Subscription | null = null;
+  private simulatedGpsLocation = { lat: 40.712776, lng: -74.005974 }; // Initial coordinates
 
   constructor(private modalController: ModalController) {}
 
   ngOnInit(): void {
     this.startPolling();
+    this.startGpsUpdates();
   }
 
   ngOnDestroy(): void {
     this.stopPolling();
+    this.stopGpsUpdates();
   }
 
   refresh(ev: any) {
@@ -44,8 +48,8 @@ export class HomePage implements OnInit, OnDestroy {
 
     if (data !== null) {
       this.ambulanceName = data;
-      this.ambulanceNameSubject.next(this.ambulanceName); // Trigger incident reload
-      this.restartPolling(); // Restart polling with the updated ambulance name
+      this.ambulanceNameSubject.next(this.ambulanceName);
+      this.restartPolling();
     }
   }
 
@@ -75,5 +79,30 @@ export class HomePage implements OnInit, OnDestroy {
   private restartPolling(): void {
     this.stopPolling();
     this.startPolling();
+  }
+
+  private startGpsUpdates(): void {
+    this.gpsUpdateSubscription = interval(10000).subscribe(() => {
+      this.simulatedGpsLocation.lat += Math.random() * 0.01 - 0.005;
+      this.simulatedGpsLocation.lng += Math.random() * 0.01 - 0.005;
+
+      const gpsLocation = `${this.simulatedGpsLocation.lat.toFixed(
+        6
+      )},${this.simulatedGpsLocation.lng.toFixed(6)}`;
+
+      this.incidentService
+        .updateAmbulanceGpsLocation(this.ambulanceName, gpsLocation)
+        .subscribe({
+          next: () => console.log('GPS location updated:', gpsLocation),
+          error: (err) => console.error('Error updating GPS:', err),
+        });
+    });
+  }
+
+  private stopGpsUpdates(): void {
+    if (this.gpsUpdateSubscription) {
+      this.gpsUpdateSubscription.unsubscribe();
+      this.gpsUpdateSubscription = null;
+    }
   }
 }
