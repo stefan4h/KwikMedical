@@ -49,7 +49,6 @@ class EmergencyController extends Controller
 
         $patient = $response->json();
 
-        // Create the emergency record
         $emergency = Emergency::create([
             'caller_name' => $request->caller_name,
             'caller_phone' => $request->caller_phone,
@@ -88,7 +87,6 @@ class EmergencyController extends Controller
             return response()->json(['message' => 'Emergency not found'], 404);
         }
 
-        // Fetch patient data from the external service
         $response = Http::get("{$this->patientServiceUrl}patients/{$emergency->patient_id}");
 
         $patient = $response->successful() ? $response->json() : null;

@@ -23,7 +23,7 @@ class dispatch extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'patient' => 'array', // Automatically cast JSON to array
-        'emergency' => 'array', // Automatically cast JSON to array
+        'patient' => 'array',
+        'emergency' => 'array',
     ];
 }

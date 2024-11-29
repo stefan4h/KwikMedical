@@ -31,7 +31,6 @@ export class ViewIncidentPage implements OnInit {
     this.incidentService.getIncidentById(id).subscribe((incident) => {
       this.incident = incident;
 
-      // Prefill fields with existing data
       this.updatedDetails = {
         what: incident.what || '',
         when: incident.when || '',
@@ -48,7 +47,7 @@ export class ViewIncidentPage implements OnInit {
     this.incidentService
       .updateIncidentDetails(this.incident.id, this.updatedDetails)
       .subscribe((updatedIncident) => {
-        this.incident = updatedIncident; // Update the view with the latest data
+        this.incident = updatedIncident;
       });
   }
 

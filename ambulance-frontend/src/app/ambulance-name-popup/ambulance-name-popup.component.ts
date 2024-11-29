@@ -53,10 +53,10 @@ export class AmbulanceNamePopupComponent {
   constructor(private modalController: ModalController) {}
 
   dismiss() {
-    this.modalController.dismiss(null); // Pass null if no changes were made
+    this.modalController.dismiss(null);
   }
 
   save() {
-    this.modalController.dismiss(this.ambulanceName); // Pass the updated name
+    this.modalController.dismiss(this.ambulanceName);
   }
 }

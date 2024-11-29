@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dispatches', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->json('patient'); // Patient data stored as JSON
-            $table->json('emergency'); // Emergency data stored as JSON
+            $table->id();
+            $table->json('patient');
+            $table->json('emergency');
             $table->integer('hospital_id');
-            $table->timestamps(); // Created at and updated at
+            $table->timestamps();
         });
     }
 

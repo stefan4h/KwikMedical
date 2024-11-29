@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('emergencies', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->string('caller_name'); // Name of the person reporting the emergency
-            $table->string('caller_phone')->nullable(); // Contact number of the caller
+            $table->id();
+            $table->string('caller_name');
+            $table->string('caller_phone')->nullable();
             $table->string('patient_name');
-            $table->unsignedBigInteger('patient_id')->nullable(); // Associated patient
+            $table->unsignedBigInteger('patient_id')->nullable();
             $table->string('nhs_registration_number');
-            $table->string('location'); // Location of the emergency
-            $table->string('region'); // Region of the emergency
-            $table->string('type'); // type of the emergency
-            $table->text('description')->nullable(); // Details about the emergency
+            $table->string('location');
+            $table->string('region');
+            $table->string('type');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

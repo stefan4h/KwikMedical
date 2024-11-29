@@ -17,7 +17,6 @@ import { CommonModule } from '@angular/common';
 export class EmergencyFormComponent {
   emergencyForm: FormGroup;
 
-  // Predefined options for region and type
   regions = ['North', 'South', 'East', 'West'];
   types = ['Heart Attack', 'Stroke', 'Accident', 'Fire', 'Poison'];
 
@@ -31,8 +30,8 @@ export class EmergencyFormComponent {
       caller_phone: ['', [Validators.maxLength(255)]],
       nhs_registration_number: ['', [Validators.required, Validators.maxLength(255)]],
       location: ['', [Validators.required, Validators.maxLength(255)]],
-      region: ['', [Validators.required]], // Changed to required without max length
-      type: ['', [Validators.required]], // Changed to required without max length
+      region: ['', [Validators.required]],
+      type: ['', [Validators.required]],
       description: ['', [Validators.maxLength(1000)]],
     });
   }
